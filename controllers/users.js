@@ -3,7 +3,7 @@ const SECRET = process.env.SECRET;
 const jwt = require('jsonwebtoken');
 module.exports = {
     signup,
-    login
+    login,
 };
 
  async function signup(req, res) {
@@ -21,7 +21,7 @@ module.exports = {
      try{
         const user = await User.findOne({ email: req.body.email })
         if(!user) return res.status(401).json({ err: 'bad credentials' });
-        
+
         user.comparePassword(req.body.password, (err, isMatch ) => {
             if(isMatch) {
                 const token = createJWT(user);
@@ -39,3 +39,5 @@ module.exports = {
  function createJWT(user) {
      return jwt.sign({ user }, SECRET, { expiresIn: '24h' })
  }
+
+ 
