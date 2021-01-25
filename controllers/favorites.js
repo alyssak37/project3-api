@@ -1,15 +1,21 @@
+const favorite = require('../models/favorite');
 const Favorite = require('./models/favorite');
 
 module.exports = {
-    addFavorite
+    createFavorite,
+    showFavorites
 };
 
-async function addFavorite(req, res) {
+async function createFavorite(req, res) {
     try {
-       const userId = req.query.userid;
-       await Favorite.create({ userId: userId });
+       await Favorite.create(req.body);
        getFact(req, res);
     } catch(error) {
-        
+        console.log(error)
     }
+}
+
+function showFavorites(req, res) {
+    const favorites = await Favorites.find({});
+    res.json(favorites)
 }
