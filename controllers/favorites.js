@@ -1,5 +1,5 @@
-const favorite = require('../models/favorite');
-const Favorite = require('./models/favorite');
+
+const Favorite = require('../models/favorite');
 
 module.exports = {
     createFavorite,
@@ -15,7 +15,7 @@ async function createFavorite(req, res) {
     }
 }
 
-function showFavorites(req, res) {
+async function showFavorites(req, res) {
     const favorites = await Favorites.find({});
     res.json(favorites)
 }
